@@ -22,7 +22,6 @@ import javax.swing.JOptionPane;
  */
 public class Interfaz extends javax.swing.JFrame {
     Reproductor Reproducir = new Reproductor();
-    Archivos descrip=new Archivos();
     boolean Verificar = false, Verificar2 =false;
     private ImageIcon IconoAnterior = new ImageIcon("Anterior.png");
     private ImageIcon IconoSiguiente = new ImageIcon("Siguiente.png");
@@ -74,7 +73,7 @@ public class Interfaz extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(4, 4, 4, 5, new java.awt.Color(0, 0, 255)));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 2, 24)); // NOI18N
-        jLabel1.setText("Cancion Actual:");
+        jLabel1.setText("Canción Actual:");
 
         AgregarButton.setBackground(new java.awt.Color(204, 204, 204));
         AgregarButton.setText("Agregar Canciones");
@@ -112,7 +111,7 @@ public class Interfaz extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 2, 24)); // NOI18N
-        jLabel2.setText("Descripcion:");
+        jLabel2.setText("Descripción:");
 
         MostrarContenido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,11 +130,10 @@ public class Interfaz extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(144, 144, 144))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(cancionActual)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(cancionActual))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(MostrarLista, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -159,11 +157,11 @@ public class Interfaz extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(cancionActual)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cancionActual)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(MostrarLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,9 +169,12 @@ public class Interfaz extends javax.swing.JFrame {
                             .addComponent(SiguienteButton)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(AgregarButton)
-                                .addComponent(VaciarButton))))
-                    .addComponent(MostrarContenido, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                                .addComponent(VaciarButton)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(MostrarContenido, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(27, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -200,7 +201,6 @@ public class Interfaz extends javax.swing.JFrame {
         Nodo Obtener= Reproducir.Frente();
         cancionActual.setText(Reproducir.Actual().getCancion().getNombre()); 
         try {
-            descrip.SetExtencion(Reproducir.url());
             ListadeDatos();
         } catch (IOException ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
@@ -213,7 +213,6 @@ public class Interfaz extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_AgregarButtonActionPerformed
-
     private void SiguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SiguienteButtonActionPerformed
             MostrarContenido.clear();
             try {
@@ -240,6 +239,25 @@ public class Interfaz extends javax.swing.JFrame {
                 8-9 flags - 2B
                 Contenido variable
                 */
+                
+                MostrarContenido.add("Disquera: "+Reproducir.Actual().getCancion().getDisquera());
+                MostrarContenido.add("Artista: "+Reproducir.Actual().getCancion().getArtista());
+                MostrarContenido.add("Album: "+Reproducir.Actual().getCancion().getAlbum());   
+                MostrarContenido.add("Año: "+Reproducir.Actual().getCancion().getAño());
+                MostrarContenido.add("Genero: "+Reproducir.Actual().getCancion().getGenero()); 
+                MostrarContenido.add("Pista: "+Reproducir.Actual().getCancion().getPista());   
+                MostrarContenido.add("Direccion: "+Reproducir.Actual().getCancion().getUrl());   
+                MostrarContenido.add("Duracion: "+Reproducir.Actual().getCancion().getDuracion());   
+                MostrarContenido.add("Letra: "+Reproducir.Actual().getCancion().getLetra());
+                MostrarContenido.add("Pagina del Artista: "+Reproducir.Actual().getCancion().getPagArtista());   
+                MostrarContenido.add("Pagina de la disquera: "+Reproducir.Actual().getCancion().getPagDisquera());   
+                MostrarContenido.add("Otras páginas: "+Reproducir.Actual().getCancion().getPagOtras());   
+                
+                
+                
+                
+                /*
+                
                 
                 File file = new File(Reproducir.Actual().getCancion().getUrl());
                 FileInputStream fin = null;
@@ -298,9 +316,10 @@ public class Interfaz extends javax.swing.JFrame {
                 fin.read(fileContent);
                 String s = new String(fileContent);
                 System.out.println("File content: " + s);
-                */   
+                /*  
                 System.out.println("");
                 dis.close();
+                */
     }
     private void AnteriorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnteriorButtonActionPerformed
         MostrarContenido.clear();

@@ -11,6 +11,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.nio.ByteBuffer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,15 +20,15 @@ import java.util.logging.Logger;
  * @author luis2
  */
 public class Archivos {
-    private String extension;
-    public void SetExtencion(String Archivo) throws FileNotFoundException
+    
+    public Cancion obtenerDatosCancion(String url,String nombre) throws FileNotFoundException, IOException
     {
-        extension=Archivo;
-    }
-    public String Mostrar() throws FileNotFoundException, IOException
-    {
+        Cancion cancionDatos = new Cancion();
+        cancionDatos.setUrl(url);
+        cancionDatos.setNombre(nombre);
         String Decir="";
         int contadorBytes = 0;
+        
                 /*               
                 Guía de estructura inicial
                 0-2 ID3
@@ -42,41 +43,54 @@ public class Archivos {
                 Contenido variable
                 */
                 
-                File file = new File(extension);
-                FileInputStream fin = null;
-                fin = new FileInputStream(file);
+                File file = new File(url);
+
                 byte[] fileData = new byte[(int)file.length()];
                 DataInputStream dis = new DataInputStream(new FileInputStream(file));
                 dis.readFully(fileData);
                 
                 //MP3 HEADER 10 BYTES
-                for (int i = contadorBytes; i < 10+contadorBytes; i++) {
-                    //System.out.print((char)(fileData[i]));
+                int tamañoHeader = 0;
+                byte [] tamañoHeaderBytes = new byte[4];       
+                int n = 0;
+                contadorBytes = 6;
+                for (int i = contadorBytes; i < 4+contadorBytes; i++) {
+                    System.out.print((char)(fileData[i]));
+                    tamañoHeaderBytes[n] = fileData[i];      
+                    n++;
                 }
-                contadorBytes = contadorBytes+10;
+                tamañoHeader = (ByteBuffer.wrap(tamañoHeaderBytes).getInt()/3);
+                System.out.println("TAMAÑO DEL FRAME: " + tamañoHeader);
+                contadorBytes = contadorBytes+4;
                 //PRIMER FRAME
                 int k = 0;
-                while(k!=10){
-                char FrameChar[] = new char[4];
+                while(contadorBytes<tamañoHeader){
+                char frameChar[] = new char[4];
                 int j=0;
                 for (int i = contadorBytes; i < 4+contadorBytes; i++) {
                     //System.out.print((char)(fileData[i]));
-                    FrameChar[j] = (char)(fileData[i]);
+                    frameChar[j] = (char)(fileData[i]);
                     j++;
                 }
                 contadorBytes = contadorBytes+4;
                 j=0;
-                String Frame = new String(FrameChar);
-                Decir=Decir+"FRAME: "+Frame+"\n";
+                String frame = new String(frameChar);
+                System.out.println("FRAME: "+frame);
                 
                 int tamañoFrame = 0;
+                byte [] tamañoFrameBytes = new byte[4];       
+                int b = 0;
                 for (int i = contadorBytes; i < 4+contadorBytes; i++) {
-                    //System.out.print((char)(fileData[i]));
-                    tamañoFrame = (int)fileData[i]+tamañoFrame;                    
+                    tamañoFrameBytes[b] = fileData[i];      
+                    b++;
                 }
+                tamañoFrame = ByteBuffer.wrap(tamañoFrameBytes).getInt();
+                System.out.println("TAMAÑO DEL FRAME: " + tamañoFrame);
                 contadorBytes = contadorBytes+6;
-                Decir=Decir+"TAMAÑO DEL FRAME: "+tamañoFrame+"\n";
-                
+                if(tamañoFrame+contadorBytes>tamañoHeader||tamañoFrame<0)
+                {
+                    break;
+                }
                 char NombreObtenido[] = new char[tamañoFrame];
                 for (int i = contadorBytes; i < tamañoFrame+contadorBytes; i++) {
                     if(((int)fileData[i])>1&&(int)fileData[i]<255){
@@ -85,19 +99,53 @@ public class Archivos {
                     }
                 }
                 String datoObtenido = new String(NombreObtenido);
-                Decir=Decir+"DATO OBTENIDO: "+datoObtenido+"vez "+k+"\n";
-                contadorBytes = contadorBytes+tamañoFrame;
-                k++;
+                if(tamañoFrame<1000){
+                    System.out.println("DATO OBTENIDO: "+datoObtenido);                    
                 }
-                             
+                contadorBytes = contadorBytes+tamañoFrame;
+                switch(FramesEnum.getTypeFrame(frame)){
+                    case disquera:
+                        cancionDatos.setDisquera(datoObtenido);
+                        break;
+                    case artista:
+                        cancionDatos.setArtista(datoObtenido);
+                        break;
+                    case artista2:
+                        cancionDatos.setArtista(datoObtenido);
+                        break;
+                    case album:
+                        cancionDatos.setAlbum(datoObtenido);
+                        break;
+                    case año:
+                        cancionDatos.setAño(datoObtenido);
+                        break;
+                    case genero:
+                        cancionDatos.setGenero(datoObtenido);
+                        break;
+                    case pista:
+                        cancionDatos.setPista(datoObtenido);
+                        break;
+                    case duracion:
+                        cancionDatos.setDuracion(datoObtenido);
+                        break;
+                    case letra:
+                        cancionDatos.setLetra(datoObtenido);
+                        break;
+                    case pagArtista:
+                        cancionDatos.setPagArtista(datoObtenido);
+                        break;
+                    case pagDisquera:
+                        cancionDatos.setPagDisquera(datoObtenido);
+                        break;
+                    case pagOtras:
+                        cancionDatos.setPagOtras(datoObtenido);
+                        break;
+                    default:                        
+                        break;
+                }     
                 
-                /*
-                byte fileContent[] = new byte[10];
-                fin.read(fileContent);
-                String s = new String(fileContent);
-                System.out.println("File content: " + s);
-                */   
+                }                           
                 dis.close();
-                return Decir;
+                return cancionDatos;
     }
 }

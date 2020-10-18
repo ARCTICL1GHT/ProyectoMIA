@@ -28,6 +28,7 @@ public class Reproductor {
     
     public void Agregar() throws Exception{
         try {
+        Archivos decodificador = new Archivos();
         JFileChooser fc = new JFileChooser();
         FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.MP3","mp3");
         fc.setFileFilter(filtro);
@@ -39,9 +40,11 @@ public class Reproductor {
             String ruta = fe.getAbsolutePath();      
             if(ruta.endsWith(".MP3") || ruta.endsWith(".mp3"))
             {
-            Cancion cancion = new Cancion();
-            cancion.setUrl(ruta);
-            cancion.setNombre(fe.getName());            
+            Cancion cancion = decodificador.obtenerDatosCancion(ruta, fe.getName());
+            System.out.println("ALBUM: "+cancion.getAlbum());
+
+            
+            
             lista.Insertar(cancion);
             }
         }
@@ -82,36 +85,5 @@ public class Reproductor {
             cancion.setUrl(ruta);
             cancion.setNombre(fe.getName());            
             lista.Insertar(cancion);            
-    }
-    public void Aleatorio()
-    {        
-        Lista listaAux1 = new Lista();
-        Lista listaAux2 = new Lista();
-        while(lista.Tama()!=0)
-        {
-            System.out.println("Sirve");
-            int dado = (int) (Math.random() * 2) + 1;    
-            if(dado==1)
-            {
-                listaAux1.Insertar(lista.pop(lista.frente()).getCancion());
-                
-            }
-            else 
-            {
-                listaAux2.Insertar(lista.pop(lista.frente()).getCancion());
-            }
-        }
-        lista = new Lista();
-        while(listaAux1.Tama()!=0)
-        {
-            lista.Insertar(listaAux1.pop(listaAux1.frente()).getCancion());
-            System.out.println(lista.frente().getCancion().getNombre());            
-        }
-        while(listaAux2.Tama()!=0)
-        {
-            lista.Insertar(listaAux2.pop(listaAux2.frente()).getCancion());
-            System.out.println(lista.frente().getCancion().getNombre());
-        }
-        Nodo origen=lista.NodoAux(lista.frente());
     }
 }

@@ -15,20 +15,60 @@ import java.util.logging.Logger;
  * @author Tato
  */
 public class Cancion {
+    
+    //TPUB
+    private String disquera;
+    //TPE1
+    private String artista;
+    //TALB
+    private String album;
+    //TYER
+    private String año;
+    //TCON
+    private String genero;
+    //TIT2
+    private String pista;
+    //url
     private String url;
+    //TLEN
+    private String duracion;
+    //USLT
+    private String letra;
+    //nombreArchivo
     private String nombre;
-     private Archivos desc;
+    //WOAR
+    private String pagArtista;
+    //WPUB 
+    private String pagDisquera;
+    //WXXX
+    private String pagOtras;
 
     public Cancion() {
-       desc=new Archivos();
+        /*this.disquera = "Sin información";
+        this.artista = "Sin información";
+        this.album = "Sin información";
+        this.año = "Sin información";
+        this.genero = "Sin información";
+        this.pista = "Sin información";
+        this.url = "Sin información";
+        this.duracion = "Sin información";
+        this.letra = "Sin información";
+        this.nombre = "Sin información";
+        this.pagOtras = "Sin información";
+        this.pagArtista = "Sin información";
+        this.pagDisquera = "Sin información";
+*/
     }
-    public String getNombre()
-    {
+
+
+    
+    
+    public String getNombre() {
         return nombre;
     }
-    public void setNombre(String nombre)
-    {
-        this.nombre=nombre;
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
     public String getUrl()
     {
@@ -37,21 +77,93 @@ public class Cancion {
     public void setUrl(String url)
     {
         this.url=url;
-        try {
-            desc.SetExtencion(url);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Cancion.class.getName()).log(Level.SEVERE, null, ex);
-        }
-;
+    }   
+
+    public String getDisquera() {
+        return disquera;
     }
-    public String getDesc()
-    {
-        try {
-            return desc.Mostrar();
-        } catch (IOException ex) {
-            Logger.getLogger(Cancion.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return "No Encontrado";
+    public void setDisquera(String disquera) {
+        this.disquera = disquera;
+    }
+
+    public String getArtista() {
+        return artista;
+    }
+
+    public void setArtista(String artista) {
+        this.artista = artista;
+    }
+
+    public String getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(String album) {
+        this.album = album;
+    }
+
+    public String getAño() {
+        return año;
+    }
+
+    public void setAño(String año) {
+        this.año = año;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    public String getPista() {
+        return pista;
+    }
+
+    public void setPista(String pista) {
+        this.pista = pista;
+    }
+
+    public String getDuracion() {
+        return duracion;
+    }
+
+    public void setDuracion(String duracion) {
+        this.duracion = duracion;
+    }
+
+    public String getLetra() {
+        return letra;
+    }
+
+    public void setLetra(String letra) {
+        this.letra = letra;
+    }
+
+    public String getPagArtista() {
+        return pagArtista;
+    }
+
+    public void setPagArtista(String pagArtista) {
+        this.pagArtista = pagArtista;
+    }
+
+    public String getPagDisquera() {
+        return pagDisquera;
+    }
+
+    public void setPagDisquera(String pagDisquera) {
+        this.pagDisquera = pagDisquera;
+    }
+
+    public String getPagOtras() {
+        return pagOtras;
+    }
+
+    public void setPagOtras(String pagOtras) {
+        this.pagOtras = pagOtras;
     }
     
     
