@@ -16,16 +16,14 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author BryanMlg
- */
+
 public class Interfaz extends javax.swing.JFrame {
     Reproductor Reproducir = new Reproductor();
     boolean Verificar = false, Verificar2 =false;
     private ImageIcon IconoAnterior = new ImageIcon("Anterior.png");
     private ImageIcon IconoSiguiente = new ImageIcon("Siguiente.png");
     private ImageIcon IconoAgregar = new ImageIcon("Canciones.png");
+    private ImageIcon IconoAgregarD = new ImageIcon("Musica.png");
     private ImageIcon IconoVentana = new ImageIcon("Canciones.png");
     private ImageIcon IconoLimpiar = new ImageIcon("Eliminar.png");
     /**
@@ -38,8 +36,9 @@ public class Interfaz extends javax.swing.JFrame {
         File f = new File(directorio.getName());
         AnteriorButton.setIcon(new ImageIcon(IconoAnterior.getImage()));
         SiguienteButton.setIcon(new ImageIcon(IconoSiguiente.getImage()));
-        AgregarButton.setIcon(new ImageIcon(IconoAgregar.getImage()));
-         VaciarButton.setIcon(new ImageIcon(IconoLimpiar.getImage()));
+        AgregarButton.setIcon(new ImageIcon(IconoAgregarD.getImage()));
+        VaciarButton.setIcon(new ImageIcon(IconoLimpiar.getImage()));
+        Agregar_Button.setIcon(new ImageIcon(IconoAgregar.getImage()));
     }
 
     
@@ -64,6 +63,7 @@ public class Interfaz extends javax.swing.JFrame {
         VaciarButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         MostrarContenido = new java.awt.List();
+        Agregar_Button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ReproductorChapin");
@@ -76,7 +76,7 @@ public class Interfaz extends javax.swing.JFrame {
         jLabel1.setText("Canción Actual:");
 
         AgregarButton.setBackground(new java.awt.Color(204, 204, 204));
-        AgregarButton.setText("Agregar Canciones");
+        AgregarButton.setText("Agregar Directorio");
         AgregarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AgregarButtonActionPerformed(evt);
@@ -119,62 +119,77 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
+        Agregar_Button.setBackground(new java.awt.Color(204, 204, 204));
+        Agregar_Button.setText("Agregar Cancion");
+        Agregar_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Agregar_ButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(118, 118, 118)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(144, 144, 144))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(cancionActual))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(MostrarLista, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(139, 139, 139)
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
                         .addComponent(AnteriorButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(AgregarButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(VaciarButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(SiguienteButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addComponent(MostrarContenido, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(MostrarLista, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(AgregarButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Agregar_Button)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(VaciarButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(SiguienteButton)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(cancionActual, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(19, 19, 19)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(MostrarContenido, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(89, 89, 89)))
+                .addGap(178, 178, 178))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                .addGap(42, 42, 42)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cancionActual)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(30, 30, 30)
+                        .addComponent(MostrarContenido, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(cancionActual, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
                         .addComponent(MostrarLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39)
+                        .addGap(42, 42, 42)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(AnteriorButton)
                             .addComponent(SiguienteButton)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(AgregarButton)
-                                .addComponent(VaciarButton)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(MostrarContenido, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(27, Short.MAX_VALUE))))
+                                .addComponent(VaciarButton)
+                                .addComponent(Agregar_Button)))))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -191,7 +206,8 @@ public class Interfaz extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void AgregarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarButtonActionPerformed
+    private void Agregar_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Agregar_ButtonActionPerformed
+        // TODO add your handling code here:
         try {
             Reproducir.Agregar();
         } catch (Exception ex) {
@@ -199,30 +215,86 @@ public class Interfaz extends javax.swing.JFrame {
         }
         int num=0;
         Nodo Obtener= Reproducir.Frente();
-        cancionActual.setText(Reproducir.Actual().getCancion().getNombre()); 
+        cancionActual.setText(Reproducir.Actual().getCancion().getNombre());
         try {
             ListadeDatos();
         } catch (IOException ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
         for(int i = 0;i<(Reproducir.NumLista()+num);i++){
-        MostrarLista.add(Obtener.getCancion().getNombre());
-        if(Obtener.getSiguiente()!=null)
+            MostrarLista.add(Obtener.getCancion().getNombre());
+            if(Obtener.getSiguiente()!=null)
             {
                 Obtener=Obtener.getSiguiente();
             }
         }
-    }//GEN-LAST:event_AgregarButtonActionPerformed
+    }//GEN-LAST:event_Agregar_ButtonActionPerformed
+
+    private void MostrarContenidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarContenidoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MostrarContenidoActionPerformed
+
+    private void VaciarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VaciarButtonActionPerformed
+        Verificar = false;
+        try {
+        } catch (Exception ex) {
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Reproducir = new Reproductor();
+        MostrarLista.clear();
+        cancionActual.setText("");
+        MostrarContenido.clear();
+    }//GEN-LAST:event_VaciarButtonActionPerformed
+
+    private void MostrarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarListaActionPerformed
+
+    }//GEN-LAST:event_MostrarListaActionPerformed
+
+    private void AnteriorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnteriorButtonActionPerformed
+        MostrarContenido.clear();
+        try {
+            Reproducir.Anterior();
+            cancionActual.setText(Reproducir.Actual().getCancion().getNombre());
+            ListadeDatos();
+        } catch (Exception ex) {
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_AnteriorButtonActionPerformed
+
     private void SiguienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SiguienteButtonActionPerformed
-            MostrarContenido.clear();
-            try {
+        MostrarContenido.clear();
+        try {
             Reproducir.Siguiente();
-            cancionActual.setText(Reproducir.Actual().getCancion().getNombre());  
+            cancionActual.setText(Reproducir.Actual().getCancion().getNombre());
             ListadeDatos();
         } catch (Exception ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_SiguienteButtonActionPerformed
+
+    private void AgregarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarButtonActionPerformed
+        try {
+            Reproducir.AgregarDirectorio();
+        } catch (Exception ex) {
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        int num=0;
+        Nodo Obtener= Reproducir.Frente();
+        cancionActual.setText(Reproducir.Actual().getCancion().getNombre());
+        try {
+            ListadeDatos();
+        } catch (IOException ex) {
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for(int i = 0;i<(Reproducir.NumLista()+num);i++){
+            MostrarLista.add(Obtener.getCancion().getNombre());
+            if(Obtener.getSiguiente()!=null)
+            {
+                Obtener=Obtener.getSiguiente();
+            }
+        }
+    }//GEN-LAST:event_AgregarButtonActionPerformed
     private void ListadeDatos() throws FileNotFoundException, IOException
     {
         int contadorBytes = 0;
@@ -320,39 +392,7 @@ public class Interfaz extends javax.swing.JFrame {
                 System.out.println("");
                 dis.close();
                 */
-    }
-    private void AnteriorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnteriorButtonActionPerformed
-        MostrarContenido.clear();
-        try {
-            Reproducir.Anterior();
-            cancionActual.setText(Reproducir.Actual().getCancion().getNombre());
-            ListadeDatos();
-        } catch (Exception ex) {
-            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }//GEN-LAST:event_AnteriorButtonActionPerformed
-
-    private void MostrarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarListaActionPerformed
-         
-    }//GEN-LAST:event_MostrarListaActionPerformed
-
-    private void VaciarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VaciarButtonActionPerformed
-       Verificar = false;
-        try {
-        } catch (Exception ex) {
-            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Reproducir = new Reproductor();
-        MostrarLista.clear();
-        cancionActual.setText("");
-        MostrarContenido.clear();
-    }//GEN-LAST:event_VaciarButtonActionPerformed
-
-    private void MostrarContenidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarContenidoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_MostrarContenidoActionPerformed
-    
+    }    
     /**
      * @param args the command line arguments
      */
@@ -391,6 +431,7 @@ public class Interfaz extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AgregarButton;
+    private javax.swing.JButton Agregar_Button;
     private javax.swing.JButton AnteriorButton;
     private java.awt.List MostrarContenido;
     private java.awt.List MostrarLista;

@@ -24,16 +24,37 @@ public class Reproductor {
         System.out.println("Reproduciendo: "+lista.actual().getCancion().getNombre());
     }
     
-  
-    
-    public void Agregar() throws Exception{
+  public void Agregar() throws Exception{
         try {
         Archivos decodificador = new Archivos();
         JFileChooser fc = new JFileChooser();
         FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.MP3","mp3");
         fc.setFileFilter(filtro);
+        fc.setFileSelectionMode( JFileChooser.FILES_ONLY);
         int result = fc.showOpenDialog(null);
-        File f = fc.getCurrentDirectory();
+        File f = fc.getSelectedFile();
+        String ruta = f.getAbsolutePath();
+       
+            if(ruta.endsWith(".MP3") || ruta.endsWith(".mp3"))
+            {
+            Cancion cancion = decodificador.obtenerDatosCancion(ruta, f.getName());
+            System.out.println("ALBUM: "+cancion.getAlbum());
+            lista.Insertar(cancion);
+            }
+        Nodo origen=lista.NodoAux(lista.frente());
+        } catch (Exception ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+    }
+    
+    public void AgregarDirectorio() throws Exception{
+        try {
+        Archivos decodificador = new Archivos();
+        JFileChooser fc = new JFileChooser();
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int result = fc.showOpenDialog(null);
+        fc.setFileSelectionMode( JFileChooser.FILES_ONLY);
+        File f = fc.getSelectedFile();
         File[] files = f.listFiles();
         for(File fe: files)
         {            
@@ -42,10 +63,11 @@ public class Reproductor {
             {
             Cancion cancion = decodificador.obtenerDatosCancion(ruta, fe.getName());
             System.out.println("ALBUM: "+cancion.getAlbum());
-
-            
-            
             lista.Insertar(cancion);
+            }
+            if(fe.isDirectory())
+            {
+                AgregarDirectorioInterno(fe.getAbsoluteFile());
             }
         }
         Nodo origen=lista.NodoAux(lista.frente());
@@ -54,7 +76,31 @@ public class Reproductor {
             System.out.println("Error: " + ex.getMessage());
         }
     }
-    
+    public void AgregarDirectorioInterno(File f) throws Exception{
+        try {
+        Archivos decodificador = new Archivos();
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.MP3","mp3");
+        File[] files = f.listFiles();
+        for(File fe: files)
+        {            
+            String ruta = fe.getAbsolutePath();      
+            if(ruta.endsWith(".MP3") || ruta.endsWith(".mp3"))
+            {
+            Cancion cancion = decodificador.obtenerDatosCancion(ruta, fe.getName());
+            System.out.println("ALBUM: "+cancion.getAlbum());
+            lista.Insertar(cancion);
+            }
+            if(fe.isDirectory())
+            {
+                AgregarDirectorioInterno(fe.getAbsoluteFile());
+            }
+        }
+        Nodo origen=lista.NodoAux(lista.frente());
+        
+        } catch (Exception ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+    }
     public void Siguiente()throws Exception {
        lista.Siguiente().getCancion().getUrl();
     }
