@@ -142,7 +142,7 @@ public class Archivos {
                         break;
                     default:                        
                         break;
-                }     
+                    }     
                 
                 }                           
                 dis.close();

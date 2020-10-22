@@ -7,9 +7,13 @@ package com.mycompany.proyectomia;
 
 import com.mycompany.proyectomia.Lista;
 import java.io.BufferedInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -131,5 +135,111 @@ public class Reproductor {
             cancion.setUrl(ruta);
             cancion.setNombre(fe.getName());            
             lista.Insertar(cancion);            
+    }
+
+    void generarArchivos() throws FileNotFoundException, IOException {
+        Lista listaAux = this.lista;  
+        listaAux.setRecorredor(this.lista.frente());
+        String nombreArchivo = "Lista de reproducción.data";
+        String formato = "WPX";
+        int ContadorBytes = 0;
+        FileOutputStream archivo = new FileOutputStream(nombreArchivo);
+        DataOutputStream escritor = new DataOutputStream(archivo);        
+        int tam = lista.Tama();
+        escritor.write(formato.getBytes(StandardCharsets.US_ASCII));
+        escritor.writeShort(tam);
+        for (int i = 0; i < tam; i++) {
+            if(listaAux.actual().getCancion().getDisquera()==null){  
+                escritor.writeByte(0);
+            }else{
+                escritor.writeByte((byte)listaAux.actual().getCancion().getDisquera().length());
+                escritor.write(listaAux.actual().getCancion().getDisquera().getBytes(StandardCharsets.US_ASCII));
+            }
+            
+            if(listaAux.actual().getCancion().getArtista()==null){  
+                escritor.writeByte(0);
+            }else{
+                escritor.writeByte((byte)listaAux.actual().getCancion().getArtista().length());
+                escritor.write(listaAux.actual().getCancion().getArtista().getBytes(StandardCharsets.US_ASCII));
+            }
+            
+            if(listaAux.actual().getCancion().getAlbum()==null){  
+                escritor.writeByte(0);
+            }else{
+                escritor.writeByte((byte)listaAux.actual().getCancion().getAlbum().length());
+                escritor.write(listaAux.actual().getCancion().getAlbum().getBytes(StandardCharsets.US_ASCII));
+            }
+            
+            if(listaAux.actual().getCancion().getAño()==null){  
+                escritor.writeByte(0);
+            }else{
+                escritor.writeByte((byte)listaAux.actual().getCancion().getAño().length());
+                escritor.write(listaAux.actual().getCancion().getAño().getBytes(StandardCharsets.US_ASCII));
+            }
+            
+            if(listaAux.actual().getCancion().getGenero()==null){  
+                escritor.writeByte(0);
+            }else{
+                escritor.writeByte((byte)listaAux.actual().getCancion().getGenero().length());
+                escritor.write(listaAux.actual().getCancion().getGenero().getBytes(StandardCharsets.US_ASCII));
+            }
+            
+            if(listaAux.actual().getCancion().getPista()==null){  
+                escritor.writeByte(0);
+            }else{
+                escritor.writeByte((byte)listaAux.actual().getCancion().getPista().length());
+                escritor.write(listaAux.actual().getCancion().getPista().getBytes(StandardCharsets.US_ASCII));
+            }
+            
+            if(listaAux.actual().getCancion().getUrl()==null){  
+                escritor.writeByte(0);
+            }else{
+                escritor.writeByte((byte)listaAux.actual().getCancion().getUrl().length());
+                escritor.write(listaAux.actual().getCancion().getUrl().getBytes(StandardCharsets.US_ASCII));
+            }
+            
+            if(listaAux.actual().getCancion().getDuracion()==null){  
+                escritor.writeByte(0);
+            }else{
+                escritor.writeByte((byte)listaAux.actual().getCancion().getDuracion().length());
+                escritor.write(listaAux.actual().getCancion().getDuracion().getBytes(StandardCharsets.US_ASCII));
+            }
+            
+            if(listaAux.actual().getCancion().getLetra()==null){  
+                escritor.writeByte(0);
+            }else{
+                escritor.writeByte((byte)listaAux.actual().getCancion().getLetra().length());
+                escritor.write(listaAux.actual().getCancion().getLetra().getBytes(StandardCharsets.US_ASCII));
+            }
+            
+            if(listaAux.actual().getCancion().getPagArtista()==null){  
+                escritor.writeByte(0);
+            }else{
+                escritor.writeByte((byte)listaAux.actual().getCancion().getPagArtista().length());
+                escritor.write(listaAux.actual().getCancion().getPagArtista().getBytes(StandardCharsets.US_ASCII));
+            }
+            
+            if(listaAux.actual().getCancion().getPagDisquera()==null){  
+                escritor.writeByte(0);
+            }else{
+                escritor.writeByte((byte)listaAux.actual().getCancion().getPagDisquera().length());
+                escritor.write(listaAux.actual().getCancion().getPagDisquera().getBytes(StandardCharsets.US_ASCII));
+            }
+            
+            if(listaAux.actual().getCancion().getPagOtras()==null){  
+                escritor.writeByte(0);
+            }else{
+                escritor.writeByte((byte)listaAux.actual().getCancion().getPagOtras().length());
+                escritor.write(listaAux.actual().getCancion().getPagOtras().getBytes(StandardCharsets.US_ASCII));
+            }
+            
+            
+            
+            
+            
+            
+            
+            listaAux.Siguiente();
+        }
     }
 }

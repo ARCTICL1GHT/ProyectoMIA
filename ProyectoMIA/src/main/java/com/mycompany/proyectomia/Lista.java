@@ -116,4 +116,8 @@ public class Lista {
         }
         return nodo;
     }
+    public void setRecorredor(Nodo frente)
+    {
+        this.recorredor = this.inicio;
+    }
 }
