@@ -24,6 +24,16 @@ public class Reproductor {
         lista = new Lista();
     }
 
+    public Lista getLista() {
+        return lista;
+    }
+
+    public void setLista(Lista lista) throws IOException {
+        this.lista = lista;
+        generarArchivos();
+    }
+    
+
     public void Play() throws Exception {
         System.out.println("Reproduciendo: "+lista.actual().getCancion().getNombre());
     }
@@ -139,7 +149,7 @@ public class Reproductor {
 
     void generarArchivos() throws FileNotFoundException, IOException {
         Lista listaAux = this.lista;  
-        listaAux.setRecorredor(this.lista.frente());
+        listaAux.setRecorredor();
         String nombreArchivo = "Lista de reproducción.data";
         String formato = "WPX";
         int ContadorBytes = 0;
@@ -149,6 +159,7 @@ public class Reproductor {
         escritor.write(formato.getBytes(StandardCharsets.US_ASCII));
         escritor.writeShort(tam);
         for (int i = 0; i < tam; i++) {
+            escritor.write("DISQ".getBytes(StandardCharsets.US_ASCII));
             if(listaAux.actual().getCancion().getDisquera()==null){  
                 escritor.writeByte(0);
             }else{
@@ -156,6 +167,7 @@ public class Reproductor {
                 escritor.write(listaAux.actual().getCancion().getDisquera().getBytes(StandardCharsets.US_ASCII));
             }
             
+            escritor.write("ARTI".getBytes(StandardCharsets.US_ASCII));
             if(listaAux.actual().getCancion().getArtista()==null){  
                 escritor.writeByte(0);
             }else{
@@ -163,6 +175,7 @@ public class Reproductor {
                 escritor.write(listaAux.actual().getCancion().getArtista().getBytes(StandardCharsets.US_ASCII));
             }
             
+            escritor.write("ALBM".getBytes(StandardCharsets.US_ASCII));
             if(listaAux.actual().getCancion().getAlbum()==null){  
                 escritor.writeByte(0);
             }else{
@@ -170,6 +183,7 @@ public class Reproductor {
                 escritor.write(listaAux.actual().getCancion().getAlbum().getBytes(StandardCharsets.US_ASCII));
             }
             
+            escritor.write("FECH".getBytes(StandardCharsets.US_ASCII));
             if(listaAux.actual().getCancion().getAño()==null){  
                 escritor.writeByte(0);
             }else{
@@ -177,6 +191,7 @@ public class Reproductor {
                 escritor.write(listaAux.actual().getCancion().getAño().getBytes(StandardCharsets.US_ASCII));
             }
             
+            escritor.write("GENE".getBytes(StandardCharsets.US_ASCII));
             if(listaAux.actual().getCancion().getGenero()==null){  
                 escritor.writeByte(0);
             }else{
@@ -184,6 +199,7 @@ public class Reproductor {
                 escritor.write(listaAux.actual().getCancion().getGenero().getBytes(StandardCharsets.US_ASCII));
             }
             
+            escritor.write("PIST".getBytes(StandardCharsets.US_ASCII));
             if(listaAux.actual().getCancion().getPista()==null){  
                 escritor.writeByte(0);
             }else{
@@ -191,6 +207,7 @@ public class Reproductor {
                 escritor.write(listaAux.actual().getCancion().getPista().getBytes(StandardCharsets.US_ASCII));
             }
             
+            escritor.write("URLX".getBytes(StandardCharsets.US_ASCII));
             if(listaAux.actual().getCancion().getUrl()==null){  
                 escritor.writeByte(0);
             }else{
@@ -198,6 +215,7 @@ public class Reproductor {
                 escritor.write(listaAux.actual().getCancion().getUrl().getBytes(StandardCharsets.US_ASCII));
             }
             
+            escritor.write("DURA".getBytes(StandardCharsets.US_ASCII));
             if(listaAux.actual().getCancion().getDuracion()==null){  
                 escritor.writeByte(0);
             }else{
@@ -205,13 +223,15 @@ public class Reproductor {
                 escritor.write(listaAux.actual().getCancion().getDuracion().getBytes(StandardCharsets.US_ASCII));
             }
             
+            escritor.write("LETR".getBytes(StandardCharsets.US_ASCII));
             if(listaAux.actual().getCancion().getLetra()==null){  
                 escritor.writeByte(0);
             }else{
-                escritor.writeByte((byte)listaAux.actual().getCancion().getLetra().length());
+                escritor.writeShort((short)listaAux.actual().getCancion().getLetra().length());
                 escritor.write(listaAux.actual().getCancion().getLetra().getBytes(StandardCharsets.US_ASCII));
             }
             
+            escritor.write("PART".getBytes(StandardCharsets.US_ASCII));
             if(listaAux.actual().getCancion().getPagArtista()==null){  
                 escritor.writeByte(0);
             }else{
@@ -219,6 +239,7 @@ public class Reproductor {
                 escritor.write(listaAux.actual().getCancion().getPagArtista().getBytes(StandardCharsets.US_ASCII));
             }
             
+            escritor.write("PDIS".getBytes(StandardCharsets.US_ASCII));
             if(listaAux.actual().getCancion().getPagDisquera()==null){  
                 escritor.writeByte(0);
             }else{
@@ -226,18 +247,13 @@ public class Reproductor {
                 escritor.write(listaAux.actual().getCancion().getPagDisquera().getBytes(StandardCharsets.US_ASCII));
             }
             
+            escritor.write("POTR".getBytes(StandardCharsets.US_ASCII));
             if(listaAux.actual().getCancion().getPagOtras()==null){  
                 escritor.writeByte(0);
             }else{
                 escritor.writeByte((byte)listaAux.actual().getCancion().getPagOtras().length());
                 escritor.write(listaAux.actual().getCancion().getPagOtras().getBytes(StandardCharsets.US_ASCII));
-            }
-            
-            
-            
-            
-            
-            
+            }  
             
             listaAux.Siguiente();
         }

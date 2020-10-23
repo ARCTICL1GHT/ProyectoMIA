@@ -91,7 +91,7 @@ public class Lista {
      }
      public Nodo Siguiente()
      {
-         if(recorredor.getSiguiente()!=null)
+        if(recorredor.getSiguiente()!=null)
         {
             recorredor = recorredor.getSiguiente();    
         }
@@ -116,7 +116,7 @@ public class Lista {
         }
         return nodo;
     }
-    public void setRecorredor(Nodo frente)
+    public void setRecorredor()
     {
         this.recorredor = this.inicio;
     }
