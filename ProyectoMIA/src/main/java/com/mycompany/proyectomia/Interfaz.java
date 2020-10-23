@@ -27,8 +27,10 @@ public class Interfaz extends javax.swing.JFrame {
     private ImageIcon IconoVentana = new ImageIcon("Canciones.png");
     private ImageIcon IconoLimpiar = new ImageIcon("Eliminar.png");
     private ImageIcon IconoCarpeta = new ImageIcon("Carpeta.jpg");
+    private ImageIcon IconoRegresar = new ImageIcon("regresar.png");
     Lista listaActual = new Lista();
     Lista listaArtistas = new Lista();
+    Lista listaAlbum = new Lista();
 
 
     /**
@@ -45,6 +47,7 @@ public class Interfaz extends javax.swing.JFrame {
         VaciarButton.setIcon(new ImageIcon(IconoLimpiar.getImage()));
         Agregar_Button.setIcon(new ImageIcon(IconoAgregar.getImage()));
         generarArchivos.setIcon(new ImageIcon(IconoCarpeta.getImage()));
+        regresar.setIcon(new ImageIcon(IconoRegresar.getImage()));
     }
 
     
@@ -72,6 +75,8 @@ public class Interfaz extends javax.swing.JFrame {
         Agregar_Button = new javax.swing.JButton();
         generarArchivos = new javax.swing.JButton();
         comboArt = new javax.swing.JComboBox<>();
+        comboAlb = new javax.swing.JComboBox<>();
+        regresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Lector de Datos");
@@ -151,6 +156,20 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
+        comboAlb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar album" }));
+        comboAlb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboAlbActionPerformed(evt);
+            }
+        });
+
+        regresar.setText("Regresar");
+        regresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                regresarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -158,22 +177,17 @@ public class Interfaz extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGap(139, 139, 139)
-                                .addComponent(jLabel1))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGap(49, 49, 49)
-                                .addComponent(cancionActual, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(139, 139, 139)
+                        .addComponent(jLabel1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(cancionActual, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(14, 14, 14)
                         .addComponent(AnteriorButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(MostrarLista, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(MostrarLista, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(AgregarButton)
@@ -183,12 +197,16 @@ public class Interfaz extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(Agregar_Button)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(VaciarButton)
+                                        .addComponent(VaciarButton))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(comboArt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(comboAlb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(SiguienteButton))
-                                    .addComponent(comboArt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 24, Short.MAX_VALUE)))))
-                .addGap(19, 19, 19)
+                                        .addComponent(regresar)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(SiguienteButton)))))
+                .addGap(19, 77, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(MostrarContenido, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -222,7 +240,10 @@ public class Interfaz extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(generarArchivos)
-                            .addComponent(comboArt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(comboArt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(comboAlb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(regresar)))))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
 
@@ -362,26 +383,84 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_generarArchivosActionPerformed
 
     private void comboArtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboArtActionPerformed
+        
         listaArtistas = new Lista();
         String itemSeleecionado = (String)comboArt.getSelectedItem();
         listaActual.setRecorredor();
+        String album = "";
         while(listaActual.actual().getSiguiente()!=null)
         {
             if(itemSeleecionado == null ? listaActual.actual().getCancion().getArtista() == null : itemSeleecionado.equals(listaActual.actual().getCancion().getArtista()))
             {         
                 listaArtistas.Insertar(listaActual.actual().getCancion());
+                if(album == null ? listaActual.actual().getCancion().getAlbum() != null : !album.equals(listaActual.actual().getCancion().getAlbum())){  
+                    System.out.println(album +" xxx  "+ listaActual.actual().getCancion().getAlbum());
+                    if(listaActual.actual().getCancion().getAlbum()!=null){
+                        album = listaActual.actual().getCancion().getAlbum();
+                        comboAlb.addItem(listaActual.actual().getCancion().getAlbum()); 
+                    }                
+                } 
             }
+             
             listaActual.Siguiente();
             
         }
         listaArtistas.Mostrar(listaArtistas.frente());
         try {
-            x();
+            mostarListaArtista();
         } catch (IOException ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_comboArtActionPerformed
-    public void x() throws IOException{
+
+    private void comboAlbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboAlbActionPerformed
+        listaAlbum = new Lista();
+        String itemSeleecionado = (String)comboAlb.getSelectedItem();
+        listaActual.setRecorredor();
+        String album = "";
+        while(listaActual.actual().getSiguiente()!=null)
+        {
+            if(itemSeleecionado == null ? listaActual.actual().getCancion().getAlbum() == null : itemSeleecionado.equals(listaActual.actual().getCancion().getAlbum()))
+            {
+                
+                listaAlbum.Insertar(listaActual.actual().getCancion());
+            }             
+            listaActual.Siguiente();            
+        }
+        try {
+            mostrarListaAlbum();
+        } catch (IOException ex) {
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_comboAlbActionPerformed
+
+    private void regresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarActionPerformed
+                Reproducir = new Reproductor();
+                MostrarLista.clear();
+                cancionActual.setText("");
+                MostrarContenido.clear();
+                int num=0;
+                try {
+                    Reproducir.setLista(listaActual);
+                } catch (IOException ex) {
+                    Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Nodo Obtener= Reproducir.Frente();
+                cancionActual.setText(Reproducir.Actual().getCancion().getPista());
+               try {
+                    ListadeDatos();
+                } catch (IOException ex) {
+                    Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                for(int i = 0;i<(Reproducir.NumLista()+num);i++){
+                    MostrarLista.add(Obtener.getCancion().getNombre());
+                    if(Obtener.getSiguiente()!=null)
+                    {
+                        Obtener=Obtener.getSiguiente();
+                    }
+                }
+    }//GEN-LAST:event_regresarActionPerformed
+    public void mostarListaArtista() throws IOException{
         
         Reproducir = new Reproductor();
                 MostrarLista.clear();
@@ -405,6 +484,28 @@ public class Interfaz extends javax.swing.JFrame {
                 }
     }
     
+    public void mostrarListaAlbum() throws IOException{
+            Reproducir = new Reproductor();
+                MostrarLista.clear();
+                cancionActual.setText("");
+                MostrarContenido.clear();
+                int num=0;
+                Reproducir.setLista(listaAlbum);
+                Nodo Obtener= Reproducir.Frente();
+                cancionActual.setText(Reproducir.Actual().getCancion().getPista());
+               try {
+                    ListadeDatos();
+                } catch (IOException ex) {
+                    Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                for(int i = 0;i<(Reproducir.NumLista()+num);i++){
+                    MostrarLista.add(Obtener.getCancion().getNombre());
+                    if(Obtener.getSiguiente()!=null)
+                    {
+                        Obtener=Obtener.getSiguiente();
+                    }
+                }
+    }
     
     private void ListadeDatos() throws FileNotFoundException, IOException
     {
@@ -549,10 +650,12 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JButton SiguienteButton;
     private javax.swing.JButton VaciarButton;
     private javax.swing.JLabel cancionActual;
+    private javax.swing.JComboBox<String> comboAlb;
     private javax.swing.JComboBox<String> comboArt;
     private javax.swing.JButton generarArchivos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton regresar;
     // End of variables declaration//GEN-END:variables
 }
