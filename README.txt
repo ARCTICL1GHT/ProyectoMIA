@@ -8,3 +8,4 @@ Al ejecutar el programa desplegara la una ventana, como caso principal aprimiria
 y si solo queremos agregar una cancion el boton continuo hacia la derecha es el prodemos manipular para la obtencion de una cancion.
 Asi mismo para movernos entre archivos debemos de utilizar los botones de flecha para el desplazamiento de canciones.
 Para limpiar y dejar en blanco todo el programa debemos de utilizar el boton vaciar, de tal modo si deseamos guardar los archivos desplegados utilizamos el boton de Generar Archivo
+Video de funcionamiento del programa https://youtu.be/9WULsV0UfOA
