@@ -392,6 +392,7 @@ public class Reproductor {
         this.lista = new Lista();
         int cantCanciones = 0; 
         boolean flag=false;
+        ArrayList<String> listado=new ArrayList<>();
         try {
             String ruta = "C:\\Users\\luis2\\OneDrive\\Documents\\Lista de reproducción.data";
 
@@ -399,27 +400,21 @@ public class Reproductor {
                 Archivos decodificador = new Archivos();
                 cantCanciones = decodificador.getTamañoCanciones(ruta);
                 Cancion canciones[] = new Cancion[cantCanciones];
-                String seleccion[] = new String[cantCanciones];
                 canciones = decodificador.obtenerDatosArchivo(ruta);
-               
                         for(int i=0;i<cantCanciones;i++)
                         {
-
-                            for(int j=0;j<seleccion.length;j++)
+                            if(Puedo(listado,Busco(canciones[i],Soy)))
                             {
-                                    if(Busco(canciones[i],Soy)==seleccion[j])
-                                {
-                                    flag=true;
-                                    System.out.println("Ingresado**********************************************");
-                                }
+                                listado.add(Busco(canciones[i],Soy));
                             }
-                                if(!flag)
-                                {
-                                    seleccion[i]=Busco(canciones[i],Soy);
-                                    flag=false;
-                                }
-                        }   
-                
+                        }
+                        
+                String seleccion[] = new String[listado.size()];
+                for(int a=0; a<listado.size();a++)
+                {
+                    System.out.println("/////////////"+listado.get(a)+"///////"+a);
+                    seleccion[a]=listado.get(a);
+                }
                
                     String resp = (String) JOptionPane.showInputDialog(null, "Seleccione "+Soy, "Seleccion", JOptionPane.DEFAULT_OPTION, null, seleccion, seleccion[0]);
                 for (int i = 0; i < cantCanciones;i++) {
@@ -427,7 +422,6 @@ public class Reproductor {
                     if(resp==Busco(canciones[i],Soy))
                     {
                     this.lista.Insertar(canciones[i]);
-                
                     }
                 }
             }
@@ -435,6 +429,17 @@ public class Reproductor {
             System.out.println("Error: " + ex.getMessage());
         }
         lista.setActual(lista.frente());
+    }
+    private boolean Puedo(ArrayList<String> listado, String palabra)
+    {
+        for(int i=0;i<listado.size();i++)
+        {
+                if(listado.get(i)==palabra)
+            {
+                return false;
+            }
+        }
+        return true;
     }
     private String Busco(Cancion cancion, String soy)
     {
