@@ -14,12 +14,14 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Interfaz extends javax.swing.JFrame {
+
     Reproductor Reproducir = new Reproductor();
-    boolean Verificar = false, Verificar2 =false;
+    boolean Verificar = false, Verificar2 = false;
     private ImageIcon IconoAnterior = new ImageIcon("Anterior.png");
     private ImageIcon IconoSiguiente = new ImageIcon("Siguiente.png");
     private ImageIcon IconoAgregar = new ImageIcon("Canciones.png");
@@ -31,7 +33,6 @@ public class Interfaz extends javax.swing.JFrame {
     Lista listaActual = new Lista();
     Lista listaArtistas = new Lista();
     Lista listaAlbum = new Lista();
-
 
     /**
      * Creates new form Interfaz
@@ -50,9 +51,6 @@ public class Interfaz extends javax.swing.JFrame {
         regresar.setIcon(new ImageIcon(IconoRegresar.getImage()));
     }
 
-    
-   
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -77,6 +75,12 @@ public class Interfaz extends javax.swing.JFrame {
         comboArt = new javax.swing.JComboBox<>();
         comboAlb = new javax.swing.JComboBox<>();
         regresar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Lector de Datos");
@@ -170,6 +174,38 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Buscar album");
+
+        jButton2.setText("Buscar artista");
+
+        jButton3.setText("Buscar por ");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Información acerca de las busquedas");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton6.setText("Opciones de edición");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setText("Cargar lista guardada (lectura)");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -184,20 +220,20 @@ public class Interfaz extends javax.swing.JFrame {
                         .addComponent(cancionActual, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addComponent(AnteriorButton, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                        .addComponent(AnteriorButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(MostrarLista, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(AgregarButton, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                                    .addComponent(AgregarButton)
                                     .addComponent(generarArchivos))
                                 .addGap(20, 20, 20)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(Agregar_Button, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+                                        .addComponent(Agregar_Button)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(VaciarButton, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                                        .addComponent(VaciarButton))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(comboArt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -205,64 +241,94 @@ public class Interfaz extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(regresar)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(SiguienteButton, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)))))
+                                .addComponent(SiguienteButton))
+                            .addComponent(jButton6)
+                            .addComponent(jButton5))))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(MostrarContenido, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jButton2))
+                                        .addComponent(jButton3))
+                                    .addGap(52, 52, 52))
+                                .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(MostrarContenido, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(379, 379, 379))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(114, 114, 114)
-                        .addComponent(jLabel2)))
-                .addGap(178, 178, 178))
+                        .addComponent(jLabel2)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(MostrarContenido, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(42, 42, 42)
+                        .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabel2)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(cancionActual, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(MostrarLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(cancionActual, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29)
-                                .addComponent(MostrarLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(42, 42, 42)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(AnteriorButton)
-                                    .addComponent(SiguienteButton)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(AgregarButton)
-                                        .addComponent(VaciarButton)
-                                        .addComponent(Agregar_Button)))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(generarArchivos)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(comboArt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(comboAlb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(regresar)))))
-                .addContainerGap(46, Short.MAX_VALUE))
+                            .addComponent(AnteriorButton)
+                            .addComponent(SiguienteButton)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(AgregarButton)
+                                .addComponent(VaciarButton)
+                                .addComponent(Agregar_Button)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(generarArchivos)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(comboArt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(comboAlb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(regresar))))
+                    .addComponent(MostrarContenido, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton3)
+                        .addGap(25, 25, 25))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jButton6)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton5)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1113, Short.MAX_VALUE)
-                .addGap(18, 18, 18))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1034, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1))
         );
 
         pack();
@@ -275,24 +341,22 @@ public class Interfaz extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
-        int num=0;
-        Nodo Obtener= Reproducir.Frente();
-        cancionActual.setText(Reproducir.Actual().getCancion().getNombre());
+        int num = 0;
+        Nodo Obtener = Reproducir.Frente();
+        cancionActual.setText(Reproducir.Actual().getCancion().getPista());
         try {
             ListadeDatos();
         } catch (IOException ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
-        for(int i = 0;i<(Reproducir.NumLista()+num);i++){
-            MostrarLista.add(Obtener.getCancion().getNombre());
-            if(Obtener.getSiguiente()!=null)
-            {
-                Obtener=Obtener.getSiguiente();
+        for (int i = 0; i < (Reproducir.NumLista() + num); i++) {
+            MostrarLista.add(Obtener.getCancion().getPista());
+            if (Obtener.getSiguiente() != null) {
+                Obtener = Obtener.getSiguiente();
             }
         }
-        
-        
-        
+
+
     }//GEN-LAST:event_Agregar_ButtonActionPerformed
 
     private void MostrarContenidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarContenidoActionPerformed
@@ -319,7 +383,7 @@ public class Interfaz extends javax.swing.JFrame {
         MostrarContenido.clear();
         try {
             Reproducir.Anterior();
-            cancionActual.setText(Reproducir.Actual().getCancion().getNombre());
+            cancionActual.setText(Reproducir.Actual().getCancion().getPista());
             ListadeDatos();
         } catch (Exception ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
@@ -331,7 +395,7 @@ public class Interfaz extends javax.swing.JFrame {
         MostrarContenido.clear();
         try {
             Reproducir.Siguiente();
-            cancionActual.setText(Reproducir.Actual().getCancion().getNombre());
+            cancionActual.setText(Reproducir.Actual().getCancion().getPista());
             ListadeDatos();
         } catch (Exception ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
@@ -344,39 +408,37 @@ public class Interfaz extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
-        int num=0;
-        Nodo Obtener= Reproducir.Frente();
-        cancionActual.setText(Reproducir.Actual().getCancion().getNombre());
+        int num = 0;
+        Nodo Obtener = Reproducir.Frente();
+        cancionActual.setText(Reproducir.Actual().getCancion().getPista());
         try {
             ListadeDatos();
         } catch (IOException ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
-        for(int i = 0;i<(Reproducir.NumLista()+num);i++){
-            MostrarLista.add(Obtener.getCancion().getNombre());
-            if(Obtener.getSiguiente()!=null)
-            {
-                Obtener=Obtener.getSiguiente();
+        for (int i = 0; i < (Reproducir.NumLista() + num); i++) {
+            MostrarLista.add(Obtener.getCancion().getPista());
+            if (Obtener.getSiguiente() != null) {
+                Obtener = Obtener.getSiguiente();
             }
         }
-        
+
         listaActual = Reproducir.getLista();
         listaActual.setRecorredor();
         String artista = "";
-        while(listaActual.actual().getSiguiente()!=null)
-        {
-            if(artista == null ? listaActual.actual().getCancion().getArtista() != null : !artista.equals(listaActual.actual().getCancion().getArtista())){              
-                if(listaActual.actual().getCancion().getArtista()!=null){
+        while (listaActual.actual().getSiguiente() != null) {
+            if (artista == null ? listaActual.actual().getCancion().getArtista() != null : !artista.equals(listaActual.actual().getCancion().getArtista())) {
+                if (listaActual.actual().getCancion().getArtista() != null) {
                     artista = listaActual.actual().getCancion().getArtista();
-                    comboArt.addItem(listaActual.actual().getCancion().getArtista()); 
-                }                
-            }           
+                    comboArt.addItem(listaActual.actual().getCancion().getArtista());
+                }
+            }
             listaActual.Siguiente();
-        }        
+        }
     }//GEN-LAST:event_AgregarButtonActionPerformed
 
     private void generarArchivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generarArchivosActionPerformed
-        try {       
+        try {
             Reproducir.generarArchivos();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
@@ -386,27 +448,23 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_generarArchivosActionPerformed
 
     private void comboArtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboArtActionPerformed
-        
+
         listaArtistas = new Lista();
-        String itemSeleecionado = (String)comboArt.getSelectedItem();
+        String itemSeleecionado = (String) comboArt.getSelectedItem();
         listaActual.setRecorredor();
         String album = "";
-        while(listaActual.actual().getSiguiente()!=null)
-        {
-            if(itemSeleecionado == null ? listaActual.actual().getCancion().getArtista() == null : itemSeleecionado.equals(listaActual.actual().getCancion().getArtista()))
-            {         
+        while (listaActual.actual().getSiguiente() != null) {
+            if (itemSeleecionado == null ? listaActual.actual().getCancion().getArtista() == null : itemSeleecionado.equals(listaActual.actual().getCancion().getArtista())) {
                 listaArtistas.Insertar(listaActual.actual().getCancion());
-                if(album == null ? listaActual.actual().getCancion().getAlbum() != null : !album.equals(listaActual.actual().getCancion().getAlbum())){  
-                    System.out.println(album +" xxx  "+ listaActual.actual().getCancion().getAlbum());
-                    if(listaActual.actual().getCancion().getAlbum()!=null){
+                if (album == null ? listaActual.actual().getCancion().getAlbum() != null : !album.equals(listaActual.actual().getCancion().getAlbum())) {
+                    System.out.println(album + " xxx  " + listaActual.actual().getCancion().getAlbum());
+                    if (listaActual.actual().getCancion().getAlbum() != null) {
                         album = listaActual.actual().getCancion().getAlbum();
-                        comboAlb.addItem(listaActual.actual().getCancion().getAlbum()); 
-                    }                
-                } 
+                        comboAlb.addItem(listaActual.actual().getCancion().getAlbum());
+                    }
+                }
             }
-             
             listaActual.Siguiente();
-            
         }
         listaArtistas.Mostrar(listaArtistas.frente());
         try {
@@ -418,17 +476,15 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void comboAlbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboAlbActionPerformed
         listaAlbum = new Lista();
-        String itemSeleecionado = (String)comboAlb.getSelectedItem();
+        String itemSeleecionado = (String) comboAlb.getSelectedItem();
         listaActual.setRecorredor();
         String album = "";
-        while(listaActual.actual().getSiguiente()!=null)
-        {
-            if(itemSeleecionado == null ? listaActual.actual().getCancion().getAlbum() == null : itemSeleecionado.equals(listaActual.actual().getCancion().getAlbum()))
-            {
-                
+        while (listaActual.actual().getSiguiente() != null) {
+            if (itemSeleecionado == null ? listaActual.actual().getCancion().getAlbum() == null : itemSeleecionado.equals(listaActual.actual().getCancion().getAlbum())) {
+
                 listaAlbum.Insertar(listaActual.actual().getCancion());
-            }             
-            listaActual.Siguiente();            
+            }
+            listaActual.Siguiente();
         }
         try {
             mostrarListaAlbum();
@@ -438,179 +494,179 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_comboAlbActionPerformed
 
     private void regresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarActionPerformed
-                Reproducir = new Reproductor();
-                MostrarLista.clear();
-                cancionActual.setText("");
-                MostrarContenido.clear();
-                int num=0;
-                try {
-                    Reproducir.setLista(listaActual);
-                } catch (IOException ex) {
-                    Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                Nodo Obtener= Reproducir.Frente();
-                cancionActual.setText(Reproducir.Actual().getCancion().getPista());
-               try {
-                    ListadeDatos();
-                } catch (IOException ex) {
-                    Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                for(int i = 0;i<(Reproducir.NumLista()+num);i++){
-                    MostrarLista.add(Obtener.getCancion().getNombre());
-                    if(Obtener.getSiguiente()!=null)
-                    {
-                        Obtener=Obtener.getSiguiente();
-                    }
-                }
-    }//GEN-LAST:event_regresarActionPerformed
-    public void mostarListaArtista() throws IOException{
-        
         Reproducir = new Reproductor();
-                MostrarLista.clear();
-                cancionActual.setText("");
-                MostrarContenido.clear();
-                int num=0;
-                Reproducir.setLista(listaArtistas);
-                Nodo Obtener= Reproducir.Frente();
-                cancionActual.setText(Reproducir.Actual().getCancion().getPista());
-               try {
-                    ListadeDatos();
-                } catch (IOException ex) {
-                    Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                for(int i = 0;i<(Reproducir.NumLista()+num);i++){
-                    MostrarLista.add(Obtener.getCancion().getNombre());
-                    if(Obtener.getSiguiente()!=null)
-                    {
-                        Obtener=Obtener.getSiguiente();
-                    }
-                }
+        MostrarLista.clear();
+        cancionActual.setText("");
+        MostrarContenido.clear();
+        int num = 0;
+        try {
+            Reproducir.setLista(listaActual);
+        } catch (IOException ex) {
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Nodo Obtener = Reproducir.Frente();
+        cancionActual.setText(Reproducir.Actual().getCancion().getPista());
+        try {
+            ListadeDatos();
+        } catch (IOException ex) {
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for (int i = 0; i < (Reproducir.NumLista() + num); i++) {
+            MostrarLista.add(Obtener.getCancion().getPista());
+            if (Obtener.getSiguiente() != null) {
+                Obtener = Obtener.getSiguiente();
+            }
+        }
+    }//GEN-LAST:event_regresarActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        JOptionPane.showMessageDialog(null, "Las busquedas se realizan a través del archivo guardado en la computadora");
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+
+        Object[] options = {"Disquera", "Artista", "Album", "Año", "Genero", "Pista", "Direccion", "Duracion (segundos)", "Letra", "Pagina del Artista", "Pagina de la disquera", "Otras paginas"};
+        int n = JOptionPane.showOptionDialog(null,
+                "¿Que desea editar de la cancion actual?",
+                "Opciones de edición",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[2]);
+        String nuevoDato = JOptionPane.showInputDialog("Escriba el nuevo valor del dato que desee cambiar");
+        JOptionPane.showMessageDialog(null, "Dato correctamente editado");
+        switch (n) {
+            case 0:
+                Reproducir.Actual().getCancion().setDisquera(nuevoDato);
+                break;
+            case 1:
+                Reproducir.Actual().getCancion().setArtista(nuevoDato);
+                break;
+            case 2:
+                Reproducir.Actual().getCancion().setAlbum(nuevoDato);
+                break;
+            case 3:
+                Reproducir.Actual().getCancion().setAño(nuevoDato);
+                break;
+            case 4:
+                Reproducir.Actual().getCancion().setGenero(nuevoDato);
+                break;
+            case 5:
+                Reproducir.Actual().getCancion().setPista(nuevoDato);
+                break;
+            case 6:
+                Reproducir.Actual().getCancion().setUrl(nuevoDato);
+                break;
+            case 7:
+                Reproducir.Actual().getCancion().setDuracion(nuevoDato);
+                break;
+            case 8:
+                Reproducir.Actual().getCancion().setLetra(nuevoDato);
+                break;
+            case 9:
+                Reproducir.Actual().getCancion().setPagArtista(nuevoDato);
+                break;
+            case 10:
+                Reproducir.Actual().getCancion().setPagDisquera(nuevoDato);
+                break;
+            case 11:
+                Reproducir.Actual().getCancion().setPagOtras(nuevoDato);
+                break;
+        }
+        try {
+            ListadeDatos();
+            Reproducir.generarArchivos();
+        } catch (IOException ex) {
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        Reproducir.leerArchivo();
+        int num = 0;
+        Nodo Obtener = Reproducir.Frente();
+        cancionActual.setText(Reproducir.Actual().getCancion().getPista());
+        try {
+            ListadeDatos();
+        } catch (IOException ex) {
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for (int i = 0; i < (Reproducir.NumLista() + num); i++) {
+            MostrarLista.add(Obtener.getCancion().getPista());
+            if (Obtener.getSiguiente() != null) {
+                Obtener = Obtener.getSiguiente();
+            }
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+    public void mostarListaArtista() throws IOException {
+
+        Reproducir = new Reproductor();
+        MostrarLista.clear();
+        cancionActual.setText("");
+        MostrarContenido.clear();
+        int num = 0;
+        Reproducir.setLista(listaArtistas);
+        Nodo Obtener = Reproducir.Frente();
+        cancionActual.setText(Reproducir.Actual().getCancion().getPista());
+        try {
+            ListadeDatos();
+        } catch (IOException ex) {
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for (int i = 0; i < (Reproducir.NumLista() + num); i++) {
+            MostrarLista.add(Obtener.getCancion().getPista());
+            if (Obtener.getSiguiente() != null) {
+                Obtener = Obtener.getSiguiente();
+            }
+        }
     }
-    
-    public void mostrarListaAlbum() throws IOException{
-            Reproducir = new Reproductor();
-                MostrarLista.clear();
-                cancionActual.setText("");
-                MostrarContenido.clear();
-                int num=0;
-                Reproducir.setLista(listaAlbum);
-                Nodo Obtener= Reproducir.Frente();
-                cancionActual.setText(Reproducir.Actual().getCancion().getPista());
-               try {
-                    ListadeDatos();
-                } catch (IOException ex) {
-                    Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                for(int i = 0;i<(Reproducir.NumLista()+num);i++){
-                    MostrarLista.add(Obtener.getCancion().getNombre());
-                    if(Obtener.getSiguiente()!=null)
-                    {
-                        Obtener=Obtener.getSiguiente();
-                    }
-                }
+
+    public void mostrarListaAlbum() throws IOException {
+        Reproducir = new Reproductor();
+        MostrarLista.clear();
+        cancionActual.setText("");
+        MostrarContenido.clear();
+        int num = 0;
+        Reproducir.setLista(listaAlbum);
+        Nodo Obtener = Reproducir.Frente();
+        cancionActual.setText(Reproducir.Actual().getCancion().getPista());
+        try {
+            ListadeDatos();
+        } catch (IOException ex) {
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for (int i = 0; i < (Reproducir.NumLista() + num); i++) {
+            MostrarLista.add(Obtener.getCancion().getPista());
+            if (Obtener.getSiguiente() != null) {
+                Obtener = Obtener.getSiguiente();
+            }
+        }
     }
-    
-    private void ListadeDatos() throws FileNotFoundException, IOException
-    {
+
+    private void ListadeDatos() throws FileNotFoundException, IOException {
+        MostrarContenido.clear();
         int contadorBytes = 0;
-                /*               
-                Guía de estructura inicial
-                0-2 ID3
-                3-4 Versión
-                5 flags
-                6-9 tamaño
-                
-                Frames
-                0-3 tipo de frame  - 4B
-                4-7 tamaño - 4B
-                8-9 flags - 2B
-                Contenido variable
-                */
-                
-                MostrarContenido.add("Disquera: "+Reproducir.Actual().getCancion().getDisquera());
-                MostrarContenido.add("Artista: "+Reproducir.Actual().getCancion().getArtista());
-                MostrarContenido.add("Album: "+Reproducir.Actual().getCancion().getAlbum());   
-                MostrarContenido.add("Año: "+Reproducir.Actual().getCancion().getAño());
-                MostrarContenido.add("Genero: "+Reproducir.Actual().getCancion().getGenero()); 
-                MostrarContenido.add("Pista: "+Reproducir.Actual().getCancion().getPista());   
-                MostrarContenido.add("Direccion: "+Reproducir.Actual().getCancion().getUrl());   
-                MostrarContenido.add("Duracion: "+Reproducir.Actual().getCancion().getDuracion());   
-                MostrarContenido.add("Letra: "+Reproducir.Actual().getCancion().getLetra());
-                MostrarContenido.add("Pagina del Artista: "+Reproducir.Actual().getCancion().getPagArtista());   
-                MostrarContenido.add("Pagina de la disquera: "+Reproducir.Actual().getCancion().getPagDisquera());   
-                MostrarContenido.add("Otras páginas: "+Reproducir.Actual().getCancion().getPagOtras());   
-                
-                
-                
-                
-                /*
-                
-                
-                File file = new File(Reproducir.Actual().getCancion().getUrl());
-                FileInputStream fin = null;
-                fin = new FileInputStream(file);
-                byte[] fileData = new byte[(int)file.length()];
-                DataInputStream dis = new DataInputStream(new FileInputStream(file));
-                dis.readFully(fileData);
-                
-                //MP3 HEADER 10 BYTES
-                for (int i = contadorBytes; i < 10+contadorBytes; i++) {
-                    //System.out.print((char)(fileData[i]));
-                }
-                contadorBytes = contadorBytes+10;
-                //PRIMER FRAME
-                int k = 0;
-                while(k!=10){
-                char FrameChar[] = new char[4];
-                int j=0;
-                for (int i = contadorBytes; i < 4+contadorBytes; i++) {
-                    //System.out.print((char)(fileData[i]));
-                    FrameChar[j] = (char)(fileData[i]);
-                    j++;
-                }
-                contadorBytes = contadorBytes+4;
-                j=0;
-                String Frame = new String(FrameChar);
-                System.out.println("FRAME: "+Frame);
-                MostrarContenido.add("FRAME: "+Frame);
-                
-                int tamañoFrame = 0;
-                for (int i = contadorBytes; i < 4+contadorBytes; i++) {
-                    //System.out.print((char)(fileData[i]));
-                    tamañoFrame = (int)fileData[i]+tamañoFrame;                    
-                }
-                contadorBytes = contadorBytes+6;
-                System.out.println("TAMAÑO DEL FRAME: "+tamañoFrame);
-                MostrarContenido.add("TAMAÑO DEL FRAME: "+tamañoFrame);
-                
-                char NombreObtenido[] = new char[tamañoFrame];
-                for (int i = contadorBytes; i < tamañoFrame+contadorBytes; i++) {
-                    if(((int)fileData[i])>1&&(int)fileData[i]<255){
-                        NombreObtenido[j] = (char)(fileData[i]);
-                        j++;
-                    }
-                }
-                String datoObtenido = new String(NombreObtenido);
-                System.out.println("DATO OBTENIDO: "+datoObtenido);
-                MostrarContenido.add("DATO OBTENIDO: "+datoObtenido);
-                contadorBytes = contadorBytes+tamañoFrame;
-                k++;
-                }
-                             
-                
-                /*
-                byte fileContent[] = new byte[10];
-                fin.read(fileContent);
-                String s = new String(fileContent);
-                System.out.println("File content: " + s);
-                /*  
-                System.out.println("");
-                dis.close();
-                */
-    }    
-    /**
-     * @param args the command line arguments
-     */
+        MostrarContenido.add("Disquera: " + Reproducir.Actual().getCancion().getDisquera());
+        MostrarContenido.add("Artista: " + Reproducir.Actual().getCancion().getArtista());
+        MostrarContenido.add("Album: " + Reproducir.Actual().getCancion().getAlbum());
+        MostrarContenido.add("Año: " + Reproducir.Actual().getCancion().getAño());
+        MostrarContenido.add("Genero: " + Reproducir.Actual().getCancion().getGenero());
+        MostrarContenido.add("Pista: " + Reproducir.Actual().getCancion().getPista());
+        MostrarContenido.add("Direccion: " + Reproducir.Actual().getCancion().getUrl());
+        MostrarContenido.add("Duracion: " + Reproducir.Actual().getCancion().getDuracion());
+        MostrarContenido.add("Letra: " + Reproducir.Actual().getCancion().getLetra());
+        MostrarContenido.add("Pagina del Artista: " + Reproducir.Actual().getCancion().getPagArtista());
+        MostrarContenido.add("Pagina de la disquera: " + Reproducir.Actual().getCancion().getPagDisquera());
+        MostrarContenido.add("Otras páginas: " + Reproducir.Actual().getCancion().getPagOtras());
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -641,7 +697,7 @@ public class Interfaz extends javax.swing.JFrame {
                 new Interfaz().setVisible(true);
             }
         });
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -656,6 +712,12 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboAlb;
     private javax.swing.JComboBox<String> comboArt;
     private javax.swing.JButton generarArchivos;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

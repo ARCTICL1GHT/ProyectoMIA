@@ -10,6 +10,7 @@ package com.mycompany.proyectomia;
  * @author Tato
  */
 public enum FramesEnum {
+    //etiquetas del MP3 ID3
     disquera("TPUB"),
     artista("TPE1"),
     artista2("TPE2"),
@@ -22,6 +23,21 @@ public enum FramesEnum {
     pagArtista("WOAR"),
     pagDisquera("WPUB"),    
     pagOtras("WXXX"),
+    
+    //etiquetas propias
+    disqueraX("DISQ"),
+    artistaX("ARTI"),
+    albumX("ALBM"),
+    añoX("FECH"),
+    generoX("GENE"),
+    pistaX("PIST"),
+    urlX("URLX"),
+    duracionX("DURA"),
+    letraX("LETR"),
+    pagArtistaX("PART"),
+    pagDisqueraX("PDIS"),    
+    pagOtrasX("POTR"),
+    
     defecto("default");
 
     private final String frame;

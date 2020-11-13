@@ -73,7 +73,9 @@ public class Lista {
     {
         return recorredor;
     }
-  
+    public void setActual(Nodo nuevoActual){
+        recorredor = nuevoActual;
+    }  
 
      public Nodo NodoAux(Nodo prin)
     {

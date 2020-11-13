@@ -165,6 +165,35 @@ public class Cancion {
     public void setPagOtras(String pagOtras) {
         this.pagOtras = pagOtras;
     }
-    
-    
+    public Integer getTotalBytes(){
+        int total = 0;
+        /*if(disquera!=null){System.out.println(disquera.length());}
+        if(artista!=null){System.out.println(artista.length());}
+        if(album!=null){System.out.println(album.length());}
+        if(año!=null){System.out.println(año.length());}
+        if(genero!=null){System.out.println(genero.length());}
+        if(pista!=null){System.out.println(pista.length());}
+        if(url!=null){System.out.println(url.length());}
+        if(duracion!=null){System.out.println(duracion.length());}
+        if(letra!=null){System.out.println(letra.length());}
+        if(pagArtista!=null){System.out.println(pagArtista.length());}
+        if(pagDisquera!=null){System.out.println(pagDisquera.length());}
+        if(pagOtras!=null){System.out.println(pagOtras.length());}*/
+        
+        if(disquera!=null){total = total + disquera.length()+5;}else{total += 5;}
+        if(artista!=null){total = total + artista.length()+5;}else{total += 5;}
+        if(album!=null){total = total + album.length()+5;}else{total += 5;}
+        if(año!=null){total = total + año.length()+5;}else{total += 5;}
+        if(genero!=null){total = total + genero.length()+5;}else{total += 5;}
+        if(pista!=null){total = total + pista.length()+5;}else{total += 5;}
+        if(url!=null){total = total + url.length()+5;}else{total += 5;}
+        if(duracion!=null){total = total + duracion.length()+5;}else{total += 5;}
+        if(letra!=null){total = total + letra.length()+6;}else{total += 6;}
+        if(pagArtista!=null){total = total + pagArtista.length()+5;}else{total += 5;}
+        if(pagDisquera!=null){total = total + pagDisquera.length()+5;}else{total += 5;}
+        if(pagOtras!=null){total = total + pagOtras.length()+5;}else{total += 5;}
+        /*System.out.println("Nombre: "+this.pista);
+        System.out.println("CANCION: "+total);*/
+        return total;
+    }
 }
