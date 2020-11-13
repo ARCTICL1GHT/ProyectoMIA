@@ -259,6 +259,7 @@ public class Archivos {
                 default:
                     break;
             }
+        System.out.println("*************************************************************");
             }else{
                 System.out.println("Posicion actual: " + contadorBytes);
                 short tamañoFrame = 0;

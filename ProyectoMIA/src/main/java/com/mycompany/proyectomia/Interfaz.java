@@ -29,7 +29,10 @@ public class Interfaz extends javax.swing.JFrame {
     private ImageIcon IconoVentana = new ImageIcon("Canciones.png");
     private ImageIcon IconoLimpiar = new ImageIcon("Eliminar.png");
     private ImageIcon IconoCarpeta = new ImageIcon("Carpeta.jpg");
-    private ImageIcon IconoRegresar = new ImageIcon("regresar.png");
+    private ImageIcon IconoRegresar = new ImageIcon("volver.png");
+    private ImageIcon IconoBuscar = new ImageIcon("Buscar.jpg");
+    private ImageIcon IconoEditar = new ImageIcon("Editar.jpg");
+    private ImageIcon IconoRecargar = new ImageIcon("Recargar.jpg");
     Lista listaActual = new Lista();
     Lista listaArtistas = new Lista();
     Lista listaAlbum = new Lista();
@@ -49,6 +52,9 @@ public class Interfaz extends javax.swing.JFrame {
         Agregar_Button.setIcon(new ImageIcon(IconoAgregar.getImage()));
         generarArchivos.setIcon(new ImageIcon(IconoCarpeta.getImage()));
         regresar.setIcon(new ImageIcon(IconoRegresar.getImage()));
+        Buscar.setIcon(new ImageIcon(IconoBuscar.getImage()));
+        Edicion.setIcon(new ImageIcon(IconoEditar.getImage()));
+        ListaGuardada.setIcon(new ImageIcon(IconoRecargar.getImage()));
     }
 
     /**
@@ -75,12 +81,11 @@ public class Interfaz extends javax.swing.JFrame {
         comboArt = new javax.swing.JComboBox<>();
         comboAlb = new javax.swing.JComboBox<>();
         regresar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        Buscar = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        Edicion = new javax.swing.JButton();
+        ListaGuardada = new javax.swing.JButton();
+        Soy = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Lector de Datos");
@@ -174,14 +179,10 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Buscar album");
-
-        jButton2.setText("Buscar artista");
-
-        jButton3.setText("Buscar por ");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        Buscar.setText("Buscar Por");
+        Buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                BuscarActionPerformed(evt);
             }
         });
 
@@ -192,17 +193,24 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
-        jButton6.setText("Opciones de edición");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        Edicion.setText("Opciones de edición");
+        Edicion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                EdicionActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Cargar lista guardada (lectura)");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        ListaGuardada.setText("Lista Guardada");
+        ListaGuardada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                ListaGuardadaActionPerformed(evt);
+            }
+        });
+
+        Soy.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Album", "Artista", "Pista", "Año" }));
+        Soy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SoyActionPerformed(evt);
             }
         });
 
@@ -242,23 +250,19 @@ public class Interfaz extends javax.swing.JFrame {
                                         .addComponent(regresar)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(SiguienteButton))
-                            .addComponent(jButton6)
-                            .addComponent(jButton5))))
+                            .addComponent(Edicion)
+                            .addComponent(ListaGuardada))))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(19, 53, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jButton2))
-                                        .addComponent(jButton3))
-                                    .addGap(52, 52, 52))
-                                .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(MostrarContenido, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(379, 379, 379))
+                            .addComponent(MostrarContenido, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Soy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(200, 200, 200))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(114, 114, 114)
                         .addComponent(jLabel2)
@@ -298,20 +302,18 @@ public class Interfaz extends javax.swing.JFrame {
                     .addComponent(MostrarContenido, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3)
-                        .addGap(25, 25, 25))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Buscar)
+                            .addComponent(Soy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(113, 113, 113))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
-                        .addComponent(jButton6)
+                        .addComponent(Edicion)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton5)
+                        .addComponent(ListaGuardada)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -319,9 +321,7 @@ public class Interfaz extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1034, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1063, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -336,6 +336,7 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void Agregar_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Agregar_ButtonActionPerformed
         // TODO add your handling code here:
+        MostrarLista.clear();
         try {
             Reproducir.Agregar();
         } catch (Exception ex) {
@@ -403,6 +404,7 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_SiguienteButtonActionPerformed
 
     private void AgregarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarButtonActionPerformed
+        MostrarLista.clear();
         try {
             Reproducir.AgregarDirectorio();
         } catch (Exception ex) {
@@ -523,11 +525,7 @@ public class Interfaz extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Las busquedas se realizan a través del archivo guardado en la computadora");
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void EdicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EdicionActionPerformed
 
         Object[] options = {"Disquera", "Artista", "Album", "Año", "Genero", "Pista", "Direccion", "Duracion (segundos)", "Letra", "Pagina del Artista", "Pagina de la disquera", "Otras paginas"};
         int n = JOptionPane.showOptionDialog(null,
@@ -586,9 +584,9 @@ public class Interfaz extends javax.swing.JFrame {
         }
 
 
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_EdicionActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void ListaGuardadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListaGuardadaActionPerformed
         Reproducir.leerArchivo();
         int num = 0;
         Nodo Obtener = Reproducir.Frente();
@@ -604,7 +602,31 @@ public class Interfaz extends javax.swing.JFrame {
                 Obtener = Obtener.getSiguiente();
             }
         }
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_ListaGuardadaActionPerformed
+
+    private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
+        // TODO add your handling code here:
+        
+               Reproducir.leerArchivoAlbum((String)Soy.getSelectedItem());
+        int num = 0;
+        Nodo Obtener = Reproducir.Frente();
+        cancionActual.setText(Reproducir.Actual().getCancion().getPista());
+        try {
+            ListadeDatos();
+        } catch (IOException ex) {
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for (int i = 0; i < (Reproducir.NumLista() + num); i++) {
+            MostrarLista.add(Obtener.getCancion().getPista());
+            if (Obtener.getSiguiente() != null) {
+                Obtener = Obtener.getSiguiente();
+            }
+        }
+    }//GEN-LAST:event_BuscarActionPerformed
+
+    private void SoyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SoyActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SoyActionPerformed
     public void mostarListaArtista() throws IOException {
 
         Reproducir = new Reproductor();
@@ -704,20 +726,19 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JButton AgregarButton;
     private javax.swing.JButton Agregar_Button;
     private javax.swing.JButton AnteriorButton;
+    private javax.swing.JButton Buscar;
+    private javax.swing.JButton Edicion;
+    private javax.swing.JButton ListaGuardada;
     private java.awt.List MostrarContenido;
     private java.awt.List MostrarLista;
     private javax.swing.JButton SiguienteButton;
+    private javax.swing.JComboBox<String> Soy;
     private javax.swing.JButton VaciarButton;
     private javax.swing.JLabel cancionActual;
     private javax.swing.JComboBox<String> comboAlb;
     private javax.swing.JComboBox<String> comboArt;
     private javax.swing.JButton generarArchivos;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

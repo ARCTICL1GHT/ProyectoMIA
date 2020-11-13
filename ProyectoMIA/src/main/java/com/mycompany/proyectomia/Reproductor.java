@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Reproductor {
@@ -147,7 +148,7 @@ public class Reproductor {
         Nodo actualAux = this.lista.actual();
         Lista listaAux = this.lista;
         Lista listaActual = this.lista;
-        String nombreArchivo = "Lista de reproducción.data";
+        String nombreArchivo = "C:\\Users\\luis2\\OneDrive\\Documents\\Lista de reproducción.data";
 
         int contadorBytes = 0;
         FileOutputStream archivo = new FileOutputStream(nombreArchivo);
@@ -356,7 +357,7 @@ public class Reproductor {
                 contadorIndices++;
             }
         }
-        archivo = new FileOutputStream("Lista de reproducción.data");
+        archivo = new FileOutputStream("C:\\Users\\luis2\\OneDrive\\Documents\\Lista de reproducción.data");
         escritor = new DataOutputStream(archivo);
         for (int i = 0; i < bytesTotales; i++) {
             escritor.writeByte(fileData[i]);
@@ -368,13 +369,8 @@ public class Reproductor {
         int cantCanciones = 0; 
         
         try {
-            JFileChooser fc = new JFileChooser();
-            FileNameExtensionFilter filtro = new FileNameExtensionFilter("*.DATA", "data");
-            fc.setFileFilter(filtro);
-            fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
-            int result = fc.showOpenDialog(null);
-            File f = fc.getSelectedFile();
-            String ruta = f.getAbsolutePath();
+            
+            String ruta = "C:\\Users\\luis2\\OneDrive\\Documents\\Lista de reproducción.data";
 
             if (ruta.endsWith(".DATA") || ruta.endsWith(".data")) {
                 Archivos decodificador = new Archivos();
@@ -386,12 +382,79 @@ public class Reproductor {
                     this.lista.Insertar(canciones[i]);
                 }
                 
-                 
-                
             }
         } catch (Exception ex) {
             System.out.println("Error: " + ex.getMessage());
         }
         lista.setActual(lista.frente());
+    }
+    public void leerArchivoAlbum(String Soy){
+        this.lista = new Lista();
+        int cantCanciones = 0; 
+        boolean flag=false;
+        try {
+            String ruta = "C:\\Users\\luis2\\OneDrive\\Documents\\Lista de reproducción.data";
+
+            if (ruta.endsWith(".DATA") || ruta.endsWith(".data")) {
+                Archivos decodificador = new Archivos();
+                cantCanciones = decodificador.getTamañoCanciones(ruta);
+                Cancion canciones[] = new Cancion[cantCanciones];
+                String seleccion[] = new String[cantCanciones];
+                canciones = decodificador.obtenerDatosArchivo(ruta);
+               
+                        for(int i=0;i<cantCanciones;i++)
+                        {
+
+                            for(int j=0;j<seleccion.length;j++)
+                            {
+                                    if(Busco(canciones[i],Soy)==seleccion[j])
+                                {
+                                    flag=true;
+                                    System.out.println("Ingresado**********************************************");
+                                }
+                            }
+                                if(!flag)
+                                {
+                                    seleccion[i]=Busco(canciones[i],Soy);
+                                    flag=false;
+                                }
+                        }   
+                
+               
+                    String resp = (String) JOptionPane.showInputDialog(null, "Seleccione "+Soy, "Seleccion", JOptionPane.DEFAULT_OPTION, null, seleccion, seleccion[0]);
+                for (int i = 0; i < cantCanciones;i++) {
+                    System.out.println(canciones[i].getArtista());
+                    if(resp==Busco(canciones[i],Soy))
+                    {
+                    this.lista.Insertar(canciones[i]);
+                
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+        lista.setActual(lista.frente());
+    }
+    private String Busco(Cancion cancion, String soy)
+    {
+        if(soy=="Album")
+        {
+            return cancion.getAlbum();
+    
+        }
+        else if(soy=="Artista")
+        {
+            return cancion.getArtista();
+        }
+        else if(soy=="Pista")
+        {
+            return cancion.getPista();
+        }
+        else if(soy=="Año")
+        {
+            return cancion.getPista();
+        }
+        return "";
     }
 }
