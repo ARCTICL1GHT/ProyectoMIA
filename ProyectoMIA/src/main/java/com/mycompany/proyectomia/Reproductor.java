@@ -148,7 +148,7 @@ public class Reproductor {
         Nodo actualAux = this.lista.actual();
         Lista listaAux = this.lista;
         Lista listaActual = this.lista;
-        String nombreArchivo = "C:\\Users\\luis2\\OneDrive\\Documents\\Lista de reproducción.data";
+        String nombreArchivo = "Lista de reproducción.data";
 
         int contadorBytes = 0;
         FileOutputStream archivo = new FileOutputStream(nombreArchivo);
@@ -357,7 +357,7 @@ public class Reproductor {
                 contadorIndices++;
             }
         }
-        archivo = new FileOutputStream("C:\\Users\\luis2\\OneDrive\\Documents\\Lista de reproducción.data");
+        archivo = new FileOutputStream("Lista de reproducción.data");
         escritor = new DataOutputStream(archivo);
         for (int i = 0; i < bytesTotales; i++) {
             escritor.writeByte(fileData[i]);
@@ -370,7 +370,7 @@ public class Reproductor {
         
         try {
             
-            String ruta = "C:\\Users\\luis2\\OneDrive\\Documents\\Lista de reproducción.data";
+            String ruta = "Lista de reproducción.data";
 
             if (ruta.endsWith(".DATA") || ruta.endsWith(".data")) {
                 Archivos decodificador = new Archivos();
@@ -394,7 +394,7 @@ public class Reproductor {
         boolean flag=false;
         ArrayList<String> listado=new ArrayList<>();
         try {
-            String ruta = "C:\\Users\\luis2\\OneDrive\\Documents\\Lista de reproducción.data";
+            String ruta = "Lista de reproducción.data";
 
             if (ruta.endsWith(".DATA") || ruta.endsWith(".data")) {
                 Archivos decodificador = new Archivos();
