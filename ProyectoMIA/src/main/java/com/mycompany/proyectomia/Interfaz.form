@@ -102,7 +102,11 @@
                                   <Component id="SiguienteButton" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="Edicion" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="ListaGuardada" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="ListaGuardada" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="eliminar" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                   </Group>
@@ -185,7 +189,10 @@
                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                           <Component id="Edicion" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="ListaGuardada" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="ListaGuardada" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="eliminar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -363,6 +370,14 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JButton" name="eliminar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Eliminar actual"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="eliminarActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

@@ -159,14 +159,14 @@ public class Archivos {
         escritor.writeInt(bytesCanciones); //Longitud del archivo 4B
         escritor.writeShort(noIndices);*/
         int contadorBytes = 3,n=0,cantBytesTotales,cantCanciones,cantIndices,contadorCanciones=0;
-        byte[] cantCancionesByte = new byte[4];
-        for (int i = contadorBytes; i < 4 + contadorBytes; i++) {
+        byte[] cantCancionesByte = new byte[2];
+        for (int i = contadorBytes; i < 2 + contadorBytes; i++) {
             cantCancionesByte[n] = fileData[i];
             n++;
         }
         
-        contadorBytes +=4;
-        cantCanciones = (ByteBuffer.wrap(cantCancionesByte).getInt());
+        contadorBytes +=2;
+        cantCanciones = (ByteBuffer.wrap(cantCancionesByte).getShort());
         Cancion canciones[] = new Cancion[cantCanciones];
         n=0;
         byte[] cantBytesTotalesBytes = new byte[4];
@@ -178,15 +178,15 @@ public class Archivos {
         cantBytesTotales = (ByteBuffer.wrap(cantBytesTotalesBytes).getInt());
         n=0;
         
-        byte[] cantIndicesBytes = new byte[4];
-        for (int i = contadorBytes; i < 4 + contadorBytes; i++) {
+        byte[] cantIndicesBytes = new byte[2];
+        for (int i = contadorBytes; i < 2 + contadorBytes; i++) {
             cantIndicesBytes[n] = fileData[i];
             n++;
         }
-        contadorBytes +=4;
-        cantIndices = (ByteBuffer.wrap(cantIndicesBytes).getInt());
+        contadorBytes +=2;
+        cantIndices = (ByteBuffer.wrap(cantIndicesBytes).getShort());
         contadorBytes = contadorBytes + (cantIndices*8);
-        while(contadorBytes<cantBytesTotales+15){
+        while(contadorBytes<cantBytesTotales+11){
             //Datos en orden disquera -> artista -> album -> año -> genero -> pista -> url -> duracion -> letra -> pagArtistas -> pagDisquera -> pagOtras
             
             char frameChar[] = new char[4];
@@ -303,12 +303,12 @@ public class Archivos {
         escritor.writeInt(bytesCanciones); //Longitud del archivo 4B
         escritor.writeShort(noIndices);*/
         int contadorBytes = 3,n=0,cantBytesTotales,cantCanciones,cantIndices;
-        byte[] cantCancionesByte = new byte[4];
-        for (int i = contadorBytes; i < 4 + contadorBytes; i++) {
+        byte[] cantCancionesByte = new byte[2];
+        for (int i = contadorBytes; i < 2 + contadorBytes; i++) {
             cantCancionesByte[n] = fileData[i];
             n++;
         }
-        cantCanciones = (ByteBuffer.wrap(cantCancionesByte).getInt());
+        cantCanciones = (ByteBuffer.wrap(cantCancionesByte).getShort());
         dis.close();
         return cantCanciones;
     }

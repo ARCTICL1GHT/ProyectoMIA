@@ -86,6 +86,7 @@ public class Interfaz extends javax.swing.JFrame {
         Edicion = new javax.swing.JButton();
         ListaGuardada = new javax.swing.JButton();
         Soy = new javax.swing.JComboBox<>();
+        eliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Lector de Datos");
@@ -214,6 +215,13 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
+        eliminar.setText("Eliminar actual");
+        eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -251,7 +259,10 @@ public class Interfaz extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(SiguienteButton))
                             .addComponent(Edicion)
-                            .addComponent(ListaGuardada))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(ListaGuardada)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(eliminar)))))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(19, 53, Short.MAX_VALUE)
@@ -313,7 +324,9 @@ public class Interfaz extends javax.swing.JFrame {
                         .addGap(27, 27, 27)
                         .addComponent(Edicion)
                         .addGap(18, 18, 18)
-                        .addComponent(ListaGuardada)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ListaGuardada)
+                            .addComponent(eliminar))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -605,9 +618,7 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_ListaGuardadaActionPerformed
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
-        // TODO add your handling code here:
-        
-               Reproducir.leerArchivoAlbum((String)Soy.getSelectedItem());
+        Reproducir.leerArchivoAlbum((String)Soy.getSelectedItem());
         int num = 0;
         Nodo Obtener = Reproducir.Frente();
         cancionActual.setText(Reproducir.Actual().getCancion().getPista());
@@ -627,6 +638,16 @@ public class Interfaz extends javax.swing.JFrame {
     private void SoyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SoyActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_SoyActionPerformed
+
+    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+       Reproducir.getLista().pop(Reproducir.Actual());
+       try {
+            ListadeDatos();
+            Reproducir.generarArchivos();
+        } catch (IOException ex) {
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_eliminarActionPerformed
     public void mostarListaArtista() throws IOException {
 
         Reproducir = new Reproductor();
@@ -737,6 +758,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel cancionActual;
     private javax.swing.JComboBox<String> comboAlb;
     private javax.swing.JComboBox<String> comboArt;
+    private javax.swing.JButton eliminar;
     private javax.swing.JButton generarArchivos;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;

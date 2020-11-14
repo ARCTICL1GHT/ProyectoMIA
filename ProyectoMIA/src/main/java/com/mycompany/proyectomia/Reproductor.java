@@ -177,14 +177,14 @@ public class Reproductor {
         System.out.println("ListaArtista: " + listaArtista);
         int noIndices = listaArtista.size();
         bytesCanciones = bytesCanciones + (noIndices * 8);
-        int bytesTotales = 15 + bytesCanciones;
+        int bytesTotales = 11 + bytesCanciones;
         System.out.println("TOTALES: " + bytesTotales);
 
         escritor.write("WPX".getBytes(StandardCharsets.US_ASCII)); //3B
-        escritor.writeInt(tam); //Canciones totales 2B
+        escritor.writeShort(tam); //Canciones totales 2B
         escritor.writeInt(bytesCanciones); //Longitud del archivo 4B
-        escritor.writeInt(noIndices);
-        contadorBytes = 15;
+        escritor.writeShort(noIndices); //indices totales 2B
+        contadorBytes = 11;
         for (int i = 0; i < noIndices; i++) {
             if (listaArtista.get(i) != null) {
                 for (int j = 0; j < 4; j++) {
@@ -336,7 +336,7 @@ public class Reproductor {
         dis.readFully(fileData);
         char frameChar[] = new char[3];
         byte[] posicionIndicesBytes = new byte [4];
-        int contadorIndices = 15,division,division2,numeroActual,numeroReal;
+        int contadorIndices = 11,division,division2,numeroActual,numeroReal;
                 
         for (int i = 0; i < noIndices; i++){
             contadorIndices+=4;
@@ -408,7 +408,6 @@ public class Reproductor {
                                 listado.add(Busco(canciones[i],Soy));
                             }
                         }
-                        
                 String seleccion[] = new String[listado.size()];
                 for(int a=0; a<listado.size();a++)
                 {
@@ -445,8 +444,7 @@ public class Reproductor {
     {
         if(soy=="Album")
         {
-            return cancion.getAlbum();
-    
+            return cancion.getAlbum();    
         }
         else if(soy=="Artista")
         {
