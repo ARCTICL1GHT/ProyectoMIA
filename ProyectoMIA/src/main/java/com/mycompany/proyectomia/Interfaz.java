@@ -640,12 +640,21 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_SoyActionPerformed
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
-       Reproducir.getLista().pop(Reproducir.Actual());
-       try {
+        MostrarLista.clear();
+        Reproducir.MeVoy();
+        int num = 0;
+        Nodo Obtener = Reproducir.Frente();
+        cancionActual.setText(Reproducir.Actual().getCancion().getPista());
+        try {
             ListadeDatos();
-            Reproducir.generarArchivos();
         } catch (IOException ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for (int i = 0; i < (Reproducir.NumLista() + num); i++) {
+            MostrarLista.add(Obtener.getCancion().getPista());
+            if (Obtener.getSiguiente() != null) {
+                Obtener = Obtener.getSiguiente();
+            }
         }
     }//GEN-LAST:event_eliminarActionPerformed
     public void mostarListaArtista() throws IOException {

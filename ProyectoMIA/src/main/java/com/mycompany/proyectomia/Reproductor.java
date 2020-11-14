@@ -460,4 +460,9 @@ public class Reproductor {
         }
         return "";
     }
+    public void MeVoy()
+    {
+        
+        lista.inicio(lista.pop(lista.actual(),lista.frente()));
+    }
 }

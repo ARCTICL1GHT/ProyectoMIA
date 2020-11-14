@@ -12,52 +12,50 @@ import com.mycompany.proyectomia.Nodo;
  * @author landivar
  */
 public class Lista {
+
     private Integer tam;
     private Nodo inicio;
     private Nodo recorredor;
-    
-    
-    public Lista()
-    {
-        tam=0;
-        inicio=null;
+
+    public Lista() {
+        tam = 0;
+        inicio = null;
     }
-    public Integer Tama()
-    {
+
+    public Integer Tama() {
         return tam;
     }
-    public Boolean esVacia()
-    {
-        return tam==0;
+
+    public Boolean esVacia() {
+        return tam == 0;
     }
-    public void Insertar(Cancion cancion)
+    public void inicio(Nodo cambio)
     {
-        if(esVacia())
-        {
+        this.inicio=cambio;
+    }
+    public void Insertar(Cancion cancion) {
+        if (esVacia()) {
             Nodo nuevo = new Nodo();
             nuevo.setCancion(cancion);
             nuevo.setSiguiente(null);
             nuevo.setAnterior(null);
             inicio = nuevo;
             tam++;
-        }
-        else
-        {
+        } else {
             Nodo nuevo = new Nodo();
             nuevo.setCancion(cancion);
             inicio.setAnterior(nuevo);
             nuevo.setSiguiente(inicio);
             nuevo.setAnterior(null);
-            inicio=nuevo;
+            inicio = nuevo;
             tam++;
         }
     }
-    public void Mostrar(Nodo inicio)
-    {
-        while(inicio.getSiguiente()!=null)
-        {
+
+    public void Mostrar(Nodo inicio) {
+        while (inicio.getSiguiente() != null) {
             System.out.println(inicio.getCancion().getUrl());
-            inicio=inicio.getSiguiente();
+            inicio = inicio.getSiguiente();
         }
         /*while(inicio!=null)
         {
@@ -65,42 +63,41 @@ public class Lista {
             inicio=inicio.getAnterior();
         }*/
     }
-    public Nodo frente()
-    {
+
+    public Nodo frente() {
         return inicio;
     }
-    public Nodo actual()
-    {
+
+    public Nodo actual() {
         return recorredor;
     }
-    public void setActual(Nodo nuevoActual){
-        recorredor = nuevoActual;
-    }  
 
-     public Nodo NodoAux(Nodo prin)
-    {
-        recorredor=prin;
+    public void setActual(Nodo nuevoActual) {
+        recorredor = nuevoActual;
+    }
+
+    public Nodo NodoAux(Nodo prin) {
+        recorredor = prin;
         recorredor.setSiguiente(prin.getSiguiente());
         return recorredor;
     }
-     public Nodo Anterior()
-     {
-         if(recorredor.getAnterior()!=null)
-        {
-            recorredor = recorredor.getAnterior();    
+
+    public Nodo Anterior() {
+        if (recorredor.getAnterior() != null) {
+            recorredor = recorredor.getAnterior();
         }
         return recorredor;
-     }
-     public Nodo Siguiente()
-     {
-        if(recorredor.getSiguiente()!=null)
-        {
-            recorredor = recorredor.getSiguiente();    
+    }
+
+    public Nodo Siguiente() {
+        if (recorredor.getSiguiente() != null) {
+            recorredor = recorredor.getSiguiente();
         }
         return recorredor;
-     }
-    public Nodo pop(Nodo nodo) {
-        if(nodo==null)
+    }
+
+    public Nodo pop(Nodo nodo, Nodo inicio) {
+        if(inicio==null)
         {
             return null;
         }
@@ -108,18 +105,35 @@ public class Lista {
         {
             inicio=null;
             tam--;
+            return inicio;
+        }
+        else if(nodo==this.inicio)
+        {
+            nodo=nodo.getSiguiente();
+            nodo.setAnterior(null);
+            tam--;
             return nodo;
         }
+       
         else
         {
-            inicio=inicio.getSiguiente();
-            inicio.setAnterior(null);
-            tam--;            
+            if(inicio.getCancion()==nodo.getCancion())
+            {
+                
+            Nodo aux=inicio.getAnterior();
+            aux.setSiguiente(inicio.getSiguiente());
+            tam--;     
+            return aux;   
+            }
+            else
+            {
+                inicio.setSiguiente(pop(nodo, inicio.getSiguiente()));
+                return inicio;
+            }
         }
-        return nodo;
     }
-    public void setRecorredor()
-    {
+
+    public void setRecorredor() {
         this.recorredor = this.inicio;
     }
 }
